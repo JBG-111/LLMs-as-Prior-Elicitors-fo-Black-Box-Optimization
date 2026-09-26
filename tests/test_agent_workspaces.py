@@ -91,7 +91,8 @@ class AgentWorkspaceTests(unittest.TestCase):
         for name in SCENARIOS:
             output = AGENT_ROOT / name / "workspace" / "output"
             self.assertTrue((output / "analysis").is_dir(), name)
-            self.assertEqual([path for path in output.rglob("*") if path.is_file()], [])
+            files = [path for path in output.rglob("*") if path.is_file()]
+            self.assertEqual([path.name for path in files], [".gitkeep"])
 
     def test_neutral_inspectors_run_without_candidate_data(self):
         for name in SCENARIOS:
