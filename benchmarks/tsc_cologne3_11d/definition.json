@@ -1,0 +1,25 @@
+{
+  "evaluation_type": "finite_pool_lookup",
+  "pool_size": 5000,
+  "pool_seed": 20260904,
+  "objective_name": "total_vehicle_waiting_time",
+  "objective_direction": "minimize",
+  "pool_sha256": "f9cd2789f892abd52d5902c6901354c1ca1f2a6ae8876b1cc00383b0e8d01287",
+  "scenario_key": "cologne3_11d",
+  "map_name": "cologne3",
+  "dimension": 11,
+  "objective_definition": "Minimize -episode_reward_total. The RESCO reward is the negative accumulated waiting time.",
+  "variables": [
+    {"index": 1, "name": "x1", "parameter": "j360082_phase0_seconds", "intersection": "I1", "signal_id": "360082", "action": 0, "movement_description": "W-W + E-E", "role": "major-like", "default_duration_seconds": 38, "lower_bound_seconds": 25, "upper_bound_seconds": 50},
+    {"index": 2, "name": "x2", "parameter": "j360082_phase1_seconds", "intersection": "I1", "signal_id": "360082", "action": 1, "movement_description": "W-S + E-N", "role": "minor/side", "default_duration_seconds": 6, "lower_bound_seconds": 5, "upper_bound_seconds": 12},
+    {"index": 3, "name": "x3", "parameter": "j360082_phase2_seconds", "intersection": "I1", "signal_id": "360082", "action": 2, "movement_description": "S-E + N-W", "role": "major-like", "default_duration_seconds": 37, "lower_bound_seconds": 25, "upper_bound_seconds": 50},
+    {"index": 4, "name": "x4", "parameter": "j360086_phase0_seconds", "intersection": "I2", "signal_id": "360086", "action": 0, "movement_description": "W-W + E-E", "role": "major-like", "default_duration_seconds": 33, "lower_bound_seconds": 22, "upper_bound_seconds": 42},
+    {"index": 5, "name": "x5", "parameter": "j360086_phase1_seconds", "intersection": "I2", "signal_id": "360086", "action": 1, "movement_description": "W-S + E-N", "role": "minor/side", "default_duration_seconds": 6, "lower_bound_seconds": 5, "upper_bound_seconds": 12},
+    {"index": 6, "name": "x6", "parameter": "j360086_phase2_seconds", "intersection": "I2", "signal_id": "360086", "action": 2, "movement_description": "S-S + N-N", "role": "major-like", "default_duration_seconds": 33, "lower_bound_seconds": 22, "upper_bound_seconds": 42},
+    {"index": 7, "name": "x7", "parameter": "j360086_phase3_seconds", "intersection": "I2", "signal_id": "360086", "action": 3, "movement_description": "S-E + N-W", "role": "minor/side", "default_duration_seconds": 6, "lower_bound_seconds": 5, "upper_bound_seconds": 12},
+    {"index": 8, "name": "x8", "parameter": "cluster_phase0_seconds", "intersection": "I3", "signal_id": "cluster_2415878664_254486231_359566_359576", "action": 0, "movement_description": "W-W + E-E", "role": "major-like", "default_duration_seconds": 53, "lower_bound_seconds": 30, "upper_bound_seconds": 60},
+    {"index": 9, "name": "x9", "parameter": "cluster_phase1_seconds", "intersection": "I3", "signal_id": "cluster_2415878664_254486231_359566_359576", "action": 1, "movement_description": "W-S + E-N", "role": "minor/side", "default_duration_seconds": 6, "lower_bound_seconds": 5, "upper_bound_seconds": 12},
+    {"index": 10, "name": "x10", "parameter": "cluster_phase2_seconds", "intersection": "I3", "signal_id": "cluster_2415878664_254486231_359566_359576", "action": 2, "movement_description": "S-S + N-N", "role": "major-like", "default_duration_seconds": 53, "lower_bound_seconds": 30, "upper_bound_seconds": 60},
+    {"index": 11, "name": "x11", "parameter": "cluster_phase3_seconds", "intersection": "I3", "signal_id": "cluster_2415878664_254486231_359566_359576", "action": 3, "movement_description": "S-E + N-W", "role": "minor/side", "default_duration_seconds": 6, "lower_bound_seconds": 5, "upper_bound_seconds": 12}
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "schema_version": "1.0",
+  "problem_id": "sustaingym_evcharging_jpl_12d",
+  "domain": "electric_vehicle_charging_and_carbon_aware_control",
+  "problem_definition": {
+    "description": "Compare twelve controller parameters for one fixed JPL day. Each active time block selects a three-parameter charging controller.",
+    "simulator": "SustainGym EVChargingEnv 0.1.7",
+    "runtime_policy": "static analysis only; do not run the simulator"
+  },
+  "objective": {
+    "name": "normalized_carbon_minus_completion",
+    "direction": "minimize",
+    "formula": "carbon_kg_normalized - completion_rate_normalized",
+    "completion_definition": {
+      "formula": "total_delivered_kwh / total_requested_kwh",
+      "unit": "dimensionless fraction (kWh / kWh)",
+      "meaning": "Energy-weighted fraction of total requested energy delivered across all sessions; not the fraction of fully charged vehicles."
+    },
+    "normalization": {
+      "method": "fixed_sample_min_max_without_clipping",
+      "carbon_kg_max": 206.17410676409003,
+      "carbon_kg_min": 90.93928216235473,
+      "completion_rate_max": 0.722820097002405,
+      "completion_rate_min": 0.28922888927764107
+    }
+  },
+  "decision_variables": [
+    {
+      "name": "b_1",
+      "type": "continuous",
+      "bounds": [
+        -4.0,
+        2.0
+      ]
+    },
+    {
+      "name": "k_u_1",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "name": "k_c_1",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        30.0
+      ]
+    },
+    {
+      "name": "b_2",
+      "type": "continuous",
+      "bounds": [
+        -4.0,
+        2.0
+      ]
+    },
+    {
+      "name": "k_u_2",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "name": "k_c_2",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        30.0
+      ]
+    },
+    {
+      "name": "b_3",
+      "type": "continuous",
+      "bounds": [
+        -4.0,
+        2.0
+      ]
+    },
+    {
+      "name": "k_u_3",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "name": "k_c_3",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        30.0
+      ]
+    },
+    {
+      "name": "b_4",
+      "type": "continuous",
+      "bounds": [
+        -4.0,
+        2.0
+      ]
+    },
+    {
+      "name": "k_u_4",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        15.0
+      ]
+    },
+    {
+      "name": "k_c_4",
+      "type": "continuous",
+      "bounds": [
+        0.0,
+        30.0
+      ]
+    }
+  ],
+  "time_blocks": [
+    {
+      "index": 1,
+      "time_range": [
+        "00:00",
+        "08:00"
+      ],
+      "step_range": [
+        0,
+        96
+      ]
+    },
+    {
+      "index": 2,
+      "time_range": [
+        "08:00",
+        "11:00"
+      ],
+      "step_range": [
+        96,
+        132
+      ]
+    },
+    {
+      "index": 3,
+      "time_range": [
+        "11:00",
+        "15:00"
+      ],
+      "step_range": [
+        132,
+        180
+      ]
+    },
+    {
+      "index": 4,
+      "time_range": [
+        "15:00",
+        "24:00"
+      ],
+      "step_range": [
+        180,
+        288
+      ]
+    }
+  ],
+  "controller_definition": {
+    "parameter_selection": "select (b_s, k_u_s, k_c_s) by the active time block",
+    "action_dimension": 52,
+    "action_formula": "a_i_t = sigmoid(b_s + k_u_s * required_rate_i_t - k_c_s * carbon_gap_t)",
+    "required_rate_formula": "required_rate_i_t = remaining_demand_kwh / (0.5546666666666666 * max(estimated_departure_steps, 1))",
+    "required_rate_constant_note": "0.5546666666666666 is a controller normalization constant; it is not a disclosed simulator delivery equation",
+    "carbon_gap_formula": "carbon_gap_t = current_moer - min(next_12_step_forecast)",
+    "empty_or_satisfied_request": 0.0,
+    "availability": "a vehicle is present from arrival until actual departure",
+    "urgency_uses": "estimated departure rather than actual departure"
+  },
+  "documented_action_interface": {
+    "symbol": "a_i_t",
+    "meaning": "normalized pilot-signal request for EVSE i at step t",
+    "range": [
+      0.0,
+      1.0
+    ],
+    "zero": "request charging off",
+    "one": "request the maximum pilot signal",
+    "monotonicity": "larger a requests higher current, all else equal",
+    "discrete_execution": "physical EVSEs support discrete pilot signals and the environment converts requests to supported signals; exact rules are undisclosed",
+    "not_actual_delivery": "a_i_t is a request, not observed delivered current, power, or energy"
+  },
+  "scenario": {
+    "site": "jpl",
+    "evse_count": 52,
+    "period": "Summer 2021",
+    "parameter_seed": 20260904,
+    "evaluation_seed": 46,
+    "realization_date": "2021-08-20",
+    "realized_session_count": 32,
+    "total_requested_kwh": 1123.5477779716102,
+    "control_steps": 288,
+    "moer_rows": 289,
+    "forecast_horizon_steps": 12,
+    "timestep_minutes": 5,
+    "project_action_in_env": false,
+    "network_feasibility_required": false
+  },
+  "available_inputs": {
+    "directory": "simulation",
+    "files": {
+      "sessions": "simulation/realized_sessions_seed46.csv",
+      "moer": "simulation/realized_moer_seed46.csv",
+      "charging_interface": "simulation/charging_interface.json"
+    }
+  },
+  "unknown_simulator_mechanisms": [
+    "exact mapping from requested pilot to executed pilot",
+    "actual delivered current, power, and energy calculation",
+    "vehicle and battery response limits",
+    "remaining-demand state-transition and capping order",
+    "network and three-phase power-flow calculations"
+  ],
+  "constraints": [
+    "Each decision variable remains within its inclusive bounds.",
+    "Only the active time block's b_s, k_u_s and k_c_s are selected at each step."
+  ],
+  "limitations": [
+    "Preferences are static model-based priors, not new simulator observations.",
+    "The benchmark describes one evaluation seed and not cross-day robustness.",
+    "Agent-derived electrical or state-transition models are research assumptions."
+  ]
+}

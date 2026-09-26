@@ -1,0 +1,15 @@
+{
+  "benchmark": "cof_xe_kr_gcmc_14d",
+  "evaluation_type": "finite_pool_lookup",
+  "dimension": 14,
+  "pool_size": 608,
+  "objective": "negative high-fidelity GCMC Xe/Kr selectivity",
+  "direction": "minimize",
+  "source": "https://github.com/SimonEnsemble/multi-fidelity-BO-of-COFs-for-Xe-Kr-seps",
+  "match_rtol": 1e-10,
+  "match_atol": 1e-12,
+  "data_sha256": {
+    "candidates.npy": "1bd7fd8658eb61beac34577a663c937182e861566e8f3c4bd18cf07d9c128fb4",
+    "objective_values.npy": "bbf58432765d99096bcfddad0fd439ab493a07917933bb2cb496557ac6242437"
+  }
+}

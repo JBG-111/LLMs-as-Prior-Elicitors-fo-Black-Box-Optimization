@@ -1,0 +1,387 @@
+{
+  "schema_version": "2.0",
+  "problem_id": "net3-preference24-f-v1",
+  "domain": "water_distribution_pump_scheduling",
+  "problem_description": "Compare 24-dimensional two-hour pump-speed schedules on EPANET Net3.",
+  "agent_may_run_simulator": false,
+  "simulator": {
+    "name": "WNTR 1.5.0 with EPANET",
+    "input_directory": "simulation",
+    "network_file": "simulation/network.inp",
+    "definition_file": "simulation/definition.json",
+    "duration_seconds": 86400,
+    "report_timestep_seconds": 3600,
+    "control_period_seconds": 7200,
+    "agent_may_run_simulator": false
+  },
+  "objective": {
+    "profile": "F",
+    "direction": "minimize",
+    "demand_mode": "base",
+    "raw_components": {
+      "energy": "Hydraulic pump energy multiplied by the two-hour tariff; minimize.",
+      "tail": "Negative mean of the lowest 10% positive-demand-junction pressures after time zero; minimize.",
+      "variation": "Mean squared cyclic adjacent speed change divided by 0.5 squared; minimize."
+    },
+    "weights": {
+      "energy": 0.75,
+      "tail": 0.05,
+      "variation": 0.2
+    },
+    "normalization": {
+      "method": "fixed affine scaling without clipping",
+      "formula": "N(z) = (z - lower) / (upper - lower)",
+      "bounds_disclosed_to_agent": false
+    }
+  },
+  "decision_variables": [
+    {
+      "name": "x0",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        0,
+        2
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x1",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        2,
+        4
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x2",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        4,
+        6
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x3",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        6,
+        8
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x4",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        8,
+        10
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x5",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        10,
+        12
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x6",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        12,
+        14
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x7",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        14,
+        16
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x8",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        16,
+        18
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x9",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        18,
+        20
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x10",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        20,
+        22
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x11",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "10",
+      "time_window_hours": [
+        22,
+        24
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x12",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        0,
+        2
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x13",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        2,
+        4
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x14",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        4,
+        6
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x15",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        6,
+        8
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x16",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        8,
+        10
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x17",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        10,
+        12
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x18",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        12,
+        14
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x19",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        14,
+        16
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x20",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        16,
+        18
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x21",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        18,
+        20
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x22",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        20,
+        22
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    },
+    {
+      "name": "x23",
+      "type": "continuous",
+      "bounds": [
+        0.7,
+        1.2
+      ],
+      "pump_id": "335",
+      "time_window_hours": [
+        22,
+        24
+      ],
+      "meaning": "two-hour pump speed multiplier"
+    }
+  ],
+  "constraints": [
+    "Every decision variable lies in [0.7, 1.2]; there are no explicit hydraulic constraints."
+  ],
+  "available_information": [
+    "Static EPANET network, demands, patterns, pump curves, elevations and topology.",
+    "Pump/time mapping, tariffs, demand multipliers, objective meanings and weights."
+  ],
+  "unavailable_information": [
+    "Normalization bounds and calibration results.",
+    "Executable WNTR/EPANET evaluator and all candidate/pair truth.",
+    "Historical preference analyses or outputs."
+  ]
+}

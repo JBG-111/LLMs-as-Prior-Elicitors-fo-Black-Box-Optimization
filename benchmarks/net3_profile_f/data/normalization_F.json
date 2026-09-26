@@ -1,0 +1,25 @@
+{
+  "benchmark_id": "net3-preference24-v1",
+  "bounds": {
+    "energy": {
+      "maximum": 8094.228586817321,
+      "minimum": 1899.3360741926456
+    },
+    "tail": {
+      "maximum": -33.58783544620997,
+      "minimum": -41.69965633875887
+    }
+  },
+  "profile": "F",
+  "protocol": {
+    "anchors": [
+      "low",
+      "midpoint",
+      "high",
+      "demand_following",
+      "tariff_avoiding"
+    ],
+    "random_sample_count": 1024,
+    "seed": 20260920
+  }
+}

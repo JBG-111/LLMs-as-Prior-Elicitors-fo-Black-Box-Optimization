@@ -1,0 +1,173 @@
+{
+  "benchmark": "COF Xe/Kr separation, 608-candidate 14D descriptor benchmark",
+  "research_problem": "Select a covalent organic framework with high xenon-over-krypton adsorption selectivity. Each candidate is an actual COF represented by 14 continuous structural and compositional descriptors; search is restricted to the finite material library, so descriptors must not be recombined into fictitious materials.",
+  "decision_variables": [
+    {
+      "name": "pore_diameter_Å",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        3.5094,
+        56.39856
+      ],
+      "meaning": "Characteristic pore diameter in angstrom. Confinement and molecular accessibility strongly affect Xe/Kr adsorption selectivity."
+    },
+    {
+      "name": "void_fraction",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.16356,
+        0.92784
+      ],
+      "meaning": "Fraction of the crystal volume accessible as void space."
+    },
+    {
+      "name": "surface_area_m²g⁻¹",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        1996.63,
+        6357.01
+      ],
+      "meaning": "Gravimetric internal surface area in square metres per gram."
+    },
+    {
+      "name": "crystal_density",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        102.72476743423348,
+        1610.7018276727147
+      ],
+      "meaning": "Bulk crystal density descriptor supplied by the source dataset."
+    },
+    {
+      "name": "B",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.18181818181818182
+      ],
+      "meaning": "Boron atomic number-density descriptor."
+    },
+    {
+      "name": "O",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.25
+      ],
+      "meaning": "Oxygen atomic number-density descriptor."
+    },
+    {
+      "name": "C",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.325,
+        0.6666666666666666
+      ],
+      "meaning": "Carbon atomic number-density descriptor."
+    },
+    {
+      "name": "H",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.5
+      ],
+      "meaning": "Hydrogen atomic number-density descriptor."
+    },
+    {
+      "name": "Si",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.02952029520295203
+      ],
+      "meaning": "Silicon atomic number-density descriptor."
+    },
+    {
+      "name": "N",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.3333333333333333
+      ],
+      "meaning": "Nitrogen atomic number-density descriptor."
+    },
+    {
+      "name": "S",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.14285714285714285
+      ],
+      "meaning": "Sulfur atomic number-density descriptor."
+    },
+    {
+      "name": "P",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.06666666666666667
+      ],
+      "meaning": "Phosphorus atomic number-density descriptor."
+    },
+    {
+      "name": "halogens",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.2857142857142857
+      ],
+      "meaning": "Combined halogen atomic number-density descriptor."
+    },
+    {
+      "name": "metals",
+      "type": "continuous descriptor",
+      "observed_bounds_in_608_candidate_library": [
+        0.0,
+        0.023809523809523808
+      ],
+      "meaning": "Combined metal atomic number-density descriptor."
+    }
+  ],
+  "objective": {
+    "name": "negative_high_fidelity_gcmc_xe_kr_selectivity",
+    "direction": "minimize",
+    "definition": "The hidden high-fidelity mixture GCMC calculation returns Xe/Kr adsorption selectivity. This benchmark uses obj = -selectivity, so smaller is better.",
+    "selectivity_definition": "Xe/Kr selectivity compares the adsorbed Xe/Kr ratio with the feed Xe/Kr ratio."
+  },
+  "fixed_simulation_inputs": {
+    "temperature_K": 298.0,
+    "xe_partial_pressure_bar": 0.2,
+    "kr_partial_pressure_bar": 0.8,
+    "force_field": "UFF",
+    "method": "mixture grand-canonical Monte Carlo"
+  },
+  "public_scientific_knowledge": [
+    "Xe is larger and more polarizable than Kr, so sufficiently confining pores and stronger dispersion interactions can favor Xe adsorption.",
+    "Very open structures with large pores and high void fraction can reduce confinement-driven selectivity even when they offer high capacity.",
+    "Pore diameter, void fraction and crystal density are coupled geometric descriptors; no single descriptor is guaranteed globally monotonic.",
+    "Surface area often affects adsorption capacity more directly than binary selectivity.",
+    "Element-density descriptors can alter adsorption interactions, but their effects depend on chemical environment and pore geometry; they should be treated as uncertain modifiers."
+  ],
+  "candidate_protocol": {
+    "full_search_pool": "608 actual COFs from the published benchmark.",
+    "visible_candidates": "all rows supplied in input/candidates.csv for the current run",
+    "comparison_pairs": "all rows supplied in input/pairs.tsv for the current run",
+    "candidate_identity_policy": "COF names are withheld from the Agent to prevent lookup of published target rankings; the 14 benchmark descriptors are visible."
+  },
+  "simulator": {
+    "kind": "hidden high-fidelity mixture GCMC result table",
+    "input_directory": "simulation"
+  },
+  "available_information": [
+    "The complete 14D descriptor vector for every visible candidate.",
+    "Descriptor meanings, observed library ranges and fixed GCMC conditions.",
+    "The scientific objective and its conversion to minimization."
+  ],
+  "unavailable_information": [
+    "COF identities, CIF structures and all GCMC/Henry output values.",
+    "Candidate selectivity/objective values and true pair labels.",
+    "Optimization histories, previously fitted response models and the published best-material identity."
+  ],
+  "agent_task": "Use adsorption and porous-material knowledge to estimate which descriptor vector should have the smaller negative Xe/Kr selectivity objective. Treat pore accessibility, confinement and chemistry as interacting hypotheses; abstain when the direction is not robust."
+}

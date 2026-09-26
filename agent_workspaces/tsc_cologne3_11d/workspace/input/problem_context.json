@@ -1,0 +1,264 @@
+{
+  "schema_version": "3.0",
+  "problem_id": "cologne3_11d_random_seed_signal_timing",
+  "domain": "fixed_time_traffic_signal_control",
+  "problem_description": "Compare 11-dimensional cyclic signal-control plans for three controlled intersections in the Cologne3 SUMO scenario.",
+  "simulator": {
+    "name": "SUMO with the RESCO Cologne3 environment",
+    "input_directory": "simulation",
+    "config_file": "simulation/cologne3.sumocfg",
+    "network_file": "simulation/cologne3.net.xml",
+    "route_files": [
+      "simulation/cologne3.rou.xml"
+    ],
+    "additional_files": [],
+    "time_window_seconds": [
+      25200,
+      28800
+    ],
+    "control_step_seconds": 5,
+    "randomness": {
+      "policy": "SUMO randomization enabled; no common fixed seed was supplied across candidate evaluations",
+      "sumo_seed": null,
+      "rollouts_per_candidate": 1
+    }
+  },
+  "objective": {
+    "name": "total_vehicle_waiting_time",
+    "direction": "minimize",
+    "unit": "vehicle-seconds",
+    "definition": "Sum the SUMO tripinfo waitingTime attribute over all non-ghost vehicles written at the end of the configured simulation window. For vehicles unfinished at the end, include their waitingTime accumulated up to that point.",
+    "not_included": [
+      "timeLoss",
+      "departDelay",
+      "episode reward",
+      "mean waiting time"
+    ]
+  },
+  "decision_variables": [
+    {
+      "name": "j360082_phase0_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        25,
+        50
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360082",
+        "resco_action_index": 0,
+        "sumo_state": "GGggrrrGGGg",
+        "movement_description": "phase_pair 4: W-W + E-E",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360082_phase1_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        5,
+        12
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360082",
+        "resco_action_index": 1,
+        "sumo_state": "rrGGrrrrrrG",
+        "movement_description": "phase_pair 5: W-S + E-N",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360082_phase2_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        25,
+        50
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360082",
+        "resco_action_index": 2,
+        "sumo_state": "rrrrGGgGrrr",
+        "movement_description": "phase_pair 1: S-E + N-W",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360086_phase0_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        22,
+        42
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360086",
+        "resco_action_index": 0,
+        "sumo_state": "GGGggrrrrGGGggrrrr",
+        "movement_description": "phase_pair 4: W-W + E-E",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360086_phase1_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        5,
+        12
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360086",
+        "resco_action_index": 1,
+        "sumo_state": "rrrGGrrrrrrrGGrrrr",
+        "movement_description": "phase_pair 5: W-S + E-N",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360086_phase2_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        22,
+        42
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360086",
+        "resco_action_index": 2,
+        "sumo_state": "rrrrrGGggrrrrrGGgg",
+        "movement_description": "phase_pair 0: S-S + N-N",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "j360086_phase3_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        5,
+        12
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "360086",
+        "resco_action_index": 3,
+        "sumo_state": "rrrrrrrGGrrrrrrrGG",
+        "movement_description": "phase_pair 1: S-E + N-W",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "cluster_phase0_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        30,
+        60
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "cluster_2415878664_254486231_359566_359576",
+        "resco_action_index": 0,
+        "sumo_state": "GGGggrrrrrGGGggrrrrr",
+        "movement_description": "phase_pair 4: W-W + E-E",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "cluster_phase1_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        5,
+        12
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "cluster_2415878664_254486231_359566_359576",
+        "resco_action_index": 1,
+        "sumo_state": "rrrGGrrrrrrrrGGrrrrr",
+        "movement_description": "phase_pair 5: W-S + E-N",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "cluster_phase2_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        30,
+        60
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "cluster_2415878664_254486231_359566_359576",
+        "resco_action_index": 2,
+        "sumo_state": "rrrrrGGGggrrrrrGGGgg",
+        "movement_description": "phase_pair 0: S-S + N-N",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    },
+    {
+      "name": "cluster_phase3_seconds",
+      "type": "continuous",
+      "unit": "seconds",
+      "bounds": [
+        5,
+        12
+      ],
+      "meaning": "Requested holding duration for one controllable green action.",
+      "simulator_mapping": {
+        "traffic_light_id": "cluster_2415878664_254486231_359566_359576",
+        "resco_action_index": 3,
+        "sumo_state": "rrrrrrrrGGrrrrrrrrGG",
+        "movement_description": "phase_pair 1: S-E + N-W",
+        "attribute": "requested_green_hold_duration_seconds",
+        "execution_rule": "effective_duration_seconds = 5 * ceil(requested_duration_seconds / 5)"
+      }
+    }
+  ],
+  "control_logic": {
+    "plan_type": "cyclic sequence of RESCO green actions per controlled signal",
+    "requested_duration": "Candidate values request seconds of holding their mapped green action.",
+    "effective_duration": "The controller acts every 5 seconds and holds an action for ceil(requested_seconds / 5) control steps.",
+    "fixed_elements": "The network, demand, green-action states, action order, and RESCO/SUMO transition behavior remain fixed across candidates."
+  },
+  "constraints": [
+    "Every requested duration must remain within its declared bound.",
+    "Only the holding durations of the 11 mapped green actions vary."
+  ],
+  "demand_interpretation": {
+    "format": "The route file contains 4,494 SUMO <vehicle> records with an explicit edge sequence in each nested <route> element.",
+    "routing": "The supplied edge sequence is a scenario fact. Runtime lane choices, speeds, queues, signal-arrival times and unfinished status are simulator outcomes not provided to the Agent."
+  },
+  "available_information": [
+    "SUMO configuration, network and explicit vehicle routes",
+    "traffic-light action states and movement descriptions",
+    "candidate parameter values and pair indices",
+    "simulation time window and the non-fixed randomization policy used to collect private truth"
+  ],
+  "limitations": [
+    "The Agent may not run SUMO and receives no queues, delays, objective values or truth labels.",
+    "Preferences are static model-based priors compared against one randomized rollout per candidate.",
+    "No common SUMO seed was fixed across candidate evaluations, so small objective gaps may contain label noise.",
+    "One rollout per candidate does not estimate expected performance across alternative SUMO random realizations."
+  ]
+}

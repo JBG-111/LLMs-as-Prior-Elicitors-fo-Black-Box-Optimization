@@ -1,0 +1,102 @@
+{
+  "benchmark_id": "net3-preference24-v1",
+  "pump_names": [
+    "10",
+    "335"
+  ],
+  "speed_lower_bound": 0.7,
+  "speed_upper_bound": 1.2,
+  "duration_seconds": 86400,
+  "report_timestep_seconds": 3600,
+  "control_period_seconds": 7200,
+  "tariff_per_kwh": [
+    0.4,
+    0.4,
+    0.4,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    0.8,
+    1.4,
+    1.4,
+    1.4,
+    0.8
+  ],
+  "removed_control_names": [
+    "control 1",
+    "control 2",
+    "control 3",
+    "control 4",
+    "control 5",
+    "control 6",
+    "control 7",
+    "control 8",
+    "control 9",
+    "control 10",
+    "control 11",
+    "control 12",
+    "control 13",
+    "control 14",
+    "control 15",
+    "control 16",
+    "control 17",
+    "control 18"
+  ],
+  "demand_multipliers": [
+    0.9,
+    1.0,
+    1.1
+  ],
+  "tail_fraction": 0.1,
+  "profiles": {
+    "A": {
+      "demand_mode": "base",
+      "weights": {
+        "energy": 0.5,
+        "tail": 0.5,
+        "variation": 0.0
+      }
+    },
+    "B": {
+      "demand_mode": "base",
+      "weights": {
+        "energy": 0.4,
+        "tail": 0.4,
+        "variation": 0.2
+      }
+    },
+    "C": {
+      "demand_mode": "robust",
+      "weights": {
+        "energy": 0.35,
+        "tail": 0.45,
+        "variation": 0.2
+      }
+    },
+    "D": {
+      "demand_mode": "base",
+      "weights": {
+        "energy": 0.8,
+        "tail": 0.2,
+        "variation": 0.0
+      }
+    },
+    "E": {
+      "demand_mode": "base",
+      "weights": {
+        "energy": 0.95,
+        "tail": 0.05,
+        "variation": 0.0
+      }
+    },
+    "F": {
+      "demand_mode": "base",
+      "weights": {
+        "energy": 0.75,
+        "tail": 0.05,
+        "variation": 0.2
+      }
+    }
+  }
+}

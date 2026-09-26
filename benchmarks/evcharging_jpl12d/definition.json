@@ -1,0 +1,164 @@
+{
+  "benchmark_version": 1,
+  "calibration_sample_count": 500,
+  "dimension": 12,
+  "evaluation_date": "2021-08-20",
+  "evaluation_seed": 46,
+  "forecast_horizon_steps": 12,
+  "input_files": [
+    {
+      "path": "data/gmms/jpl/2021-05-01 2021-08-31 30.pkl",
+      "sha256": "77874e130f852604a221437019a18995af5f9936a1f3912bbef719a0b44d035b",
+      "size_bytes": 14997
+    },
+    {
+      "path": "data/moer/SGIP_CAISO_SCE_2021-05.csv.gz",
+      "sha256": "15addca730a0edb799f63bf50720d6bbc2882eb827fc30722fe7e09610fce80d",
+      "size_bytes": 1016676
+    },
+    {
+      "path": "data/moer/SGIP_CAISO_SCE_2021-06.csv.gz",
+      "sha256": "4596d1b95fbda2c900b7a8ce7e48352bdd6a9226eaae5a4421665c8d0d0c88ac",
+      "size_bytes": 985214
+    },
+    {
+      "path": "data/moer/SGIP_CAISO_SCE_2021-07.csv.gz",
+      "sha256": "4ec8e0f079dcc9dee59e3be0b574b7c67550e247c4cf2a651b1305776c6b68ee",
+      "size_bytes": 1013080
+    },
+    {
+      "path": "data/moer/SGIP_CAISO_SCE_2021-08.csv.gz",
+      "sha256": "3a0f179f8f9d79c55f59c66d4f67b044fd94bc67843e2b095ce287fec25e7ea4",
+      "size_bytes": 1022305
+    }
+  ],
+  "network_feasibility_required": false,
+  "normalization_bounds": {
+    "carbon_kg_max": 206.17410676409003,
+    "carbon_kg_min": 90.93928216235473,
+    "completion_rate_max": 0.722820097002405,
+    "completion_rate_min": 0.28922888927764107
+  },
+  "objective": {
+    "calibration_obj_max": 0.05674992162547654,
+    "calibration_obj_min": -0.07900246454025608,
+    "direction": "minimize",
+    "formula": "carbon_kg_normalized - completion_rate_normalized",
+    "normalization": "fixed_sample_min_max_without_clipping"
+  },
+  "parameter_seed": 20260904,
+  "parameters": [
+    {
+      "lower": -4.0,
+      "name": "b_1",
+      "upper": 2.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_u_1",
+      "upper": 15.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_c_1",
+      "upper": 30.0
+    },
+    {
+      "lower": -4.0,
+      "name": "b_2",
+      "upper": 2.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_u_2",
+      "upper": 15.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_c_2",
+      "upper": 30.0
+    },
+    {
+      "lower": -4.0,
+      "name": "b_3",
+      "upper": 2.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_u_3",
+      "upper": 15.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_c_3",
+      "upper": 30.0
+    },
+    {
+      "lower": -4.0,
+      "name": "b_4",
+      "upper": 2.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_u_4",
+      "upper": 15.0
+    },
+    {
+      "lower": 0.0,
+      "name": "k_c_4",
+      "upper": 30.0
+    }
+  ],
+  "period": "Summer 2021",
+  "project_action_in_env": false,
+  "requested_kwh": 1123.5477779716102,
+  "session_count": 32,
+  "site": "jpl",
+  "station_count": 52,
+  "time_blocks": [
+    {
+      "end": "08:00",
+      "index": 1,
+      "start": "00:00",
+      "steps": [
+        0,
+        96
+      ]
+    },
+    {
+      "end": "11:00",
+      "index": 2,
+      "start": "08:00",
+      "steps": [
+        96,
+        132
+      ]
+    },
+    {
+      "end": "15:00",
+      "index": 3,
+      "start": "11:00",
+      "steps": [
+        132,
+        180
+      ]
+    },
+    {
+      "end": "24:00",
+      "index": 4,
+      "start": "15:00",
+      "steps": [
+        180,
+        288
+      ]
+    }
+  ],
+  "versions": {
+    "acnportal": "0.3.3",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "python": "3.10.20",
+    "scikit-learn": "1.7.2",
+    "sustaingym": "0.1.7"
+  }
+}
